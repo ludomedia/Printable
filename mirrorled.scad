@@ -1,8 +1,4 @@
-//$fa = 1;
-//$fs = 1;
-
 t = 0.4;
-
 r = 57.5;
 ep = 4.5;
 e = 1.25;
@@ -86,9 +82,4 @@ module anneau() {
 
 difference() {
 	anneau();
-	/*translate([10, -r - 20, -20]) cube([r, 2 * r + 40, 40]);
-	translate([-10 - r, -r - 20, -20]) cube([r, 2 * r + 40, 40]);
-	rotate(-90, [0, 0, 1]) translate([-10 - r, -r - 20, -20]) cube([r, 2 * r + 40, 40]);
-*/
 }
-
