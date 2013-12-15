@@ -24,10 +24,10 @@ module ovale(d, l, h) {
 	j = jeu de glissement
 */
 module nema17(h, j) {
-	translate([-15.5,-15.5,0]) ovale(3.5, 3.5 + j, h);
-	translate([ 15.5,-15.5,0]) ovale(3.5, 3.5 + j, h);
-	translate([-15.5, 15.5,0]) ovale(3.5, 3.5 + j, h);
-	translate([ 15.5, 15.5,0]) ovale(3.5, 3.5 + j, h);
+	translate([-15.5,-15.5,0]) ovale(4, 4 + j, h);
+	translate([ 15.5,-15.5,0]) ovale(4, 4 + j, h);
+	translate([-15.5, 15.5,0]) ovale(4, 4 + j, h);
+	translate([ 15.5, 15.5,0]) ovale(4, 4 + j, h);
 	ovale(24, 24 + j, h);
 }
 
@@ -42,7 +42,30 @@ module vissixpans(de, he, dv, l) {
 	cylinder(l, dv/2,dv/2);
 }
 
+/* vis à tete cylindrique et son écrou six pans
+	m = metric 3 = M3, 4 = M4, etc.
+	h = longueur totale de la vis
+*/
+module vis_noyee(m, h) {
+	if(m==3) {
+		cylinder(2.5, 5.5/2, 5.5/2);
+		cylinder(h, 3.5/2, 3.5/2);
+		translate([0,0,h-2.5/2]) sixpans(5.8, 2.5);
+	}
+	else if(m==4) {
+		cylinder(3, 4.5/2, 4.5/2);
+		cylinder(h, 4.5/2, 4.5/2);
+		translate([0,0,h-3.5/2]) sixpans(7.5, 3.5);
+	}
+	else if(m==5) {
+		cylinder(4.5, 10.5/2, 10.5/2);
+		cylinder(h, 5.5/2, 5.5/2);
+		translate([0,0,h-4.5/2]) sixpans(8.5, 4.5);
+
+	}
+}
+
 //vissixpans(6, 3, 3, 20);
-//nema17(3, 2);
+// nema17(5, 4);
 //ovale(5, 10, 3);
 //sixpans(8, 3);
