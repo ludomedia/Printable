@@ -48,19 +48,19 @@ module vissixpans(de, he, dv, l) {
 */
 module vis_noyee(m, h) {
 	if(m==3) {
-		cylinder(2.5, 5.5/2, 5.5/2);
-		cylinder(h, 3.5/2, 3.5/2);
-		translate([0,0,h-2.5/2]) sixpans(5.8, 2.5);
+		cylinder(3, 6.5/2, 6.5/2);
+		cylinder(h, 3.8/2, 3.8/2);
+		translate([0,0,h-3/2]) sixpans(5.9, 3);
 	}
 	else if(m==4) {
-		cylinder(3, 4.5/2, 4.5/2);
-		cylinder(h, 4.5/2, 4.5/2);
-		translate([0,0,h-3.5/2]) sixpans(7.5, 3.5);
+		cylinder(4, 8.5/2, 8.5/2);
+		cylinder(h, 4.4/2, 4.4/2);
+		translate([0,0,h-4/2]) sixpans(7.5, 4);
 	}
 	else if(m==5) {
-		cylinder(4.5, 10.5/2, 10.5/2);
+		cylinder(5, 10.5/2, 10.5/2);
 		cylinder(h, 5.5/2, 5.5/2);
-		translate([0,0,h-4.5/2]) sixpans(8.5, 4.5);
+		translate([0,0,h-5/2]) sixpans(8.5, 5);
 
 	}
 }

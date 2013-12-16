@@ -1,7 +1,7 @@
 include <util.scad>;
 
-//$fa = 1;
-//$fs = 1;
+$fa = 1;
+$fs = 1;
 
 sx = 60;
 sy = 75;
@@ -51,45 +51,52 @@ module meca() {
 	}
 }
 
-module pression() {
-	difference() {
-		union() {
-			translate([-43,-pdy,-pz/2]) {
-				translate([35, 0,0]) {
-					difference() {
-						union() {
-							translate([0,-pe2/2,0]) cube([px+pe1/2,pe2,pz]);	
-							translate([px-pe1/2,-pe2/2+3,0]) rotate(-10,[0,0,1]) {
-								cube([pe1,py+pe2/2,pz]);	
-								translate([0,py-10,pz/2]) cube([16,pe2,pz],true); 
+module pression(view) {
+	intersection() {
+		translate([-20,-20,0]) {
+			if(view==0) translate([0,0,-pz]) cube([px+40,py+40,2*pz]);
+			else if(view==1) translate([0,0,-pz]) cube([px+40,py+40,pz]);
+			else if(view==2) cube([px+40,py+40,pz]);
+		}
+		difference() {
+			union() {
+				translate([-43,-pdy,-pz/2]) {
+					translate([35, 0,0]) {
+						difference() {
+							union() {
+								translate([0,-pe2/2,0]) cube([px+pe1/2,pe2,pz]);	
+								translate([px-pe1/2,-pe2/2+3,0]) rotate(-5,[0,0,1]) {
+									cube([pe1,py+pe2/2,pz]);	
+									translate([0,py-10,pz/2]) cube([16,pe2,pz],true); 
+								}
 							}
+							translate([0,-pe2/2,(pz-pinz)/2]) cube([px+20,py-20,pinz]);
 						}
-						translate([0,-pe2/2,(pz-pinz)/2]) cube([px+20,py-20,pinz]);
+					}
+					translate([35 + px,0,pz/2]) cube([pe1,pe2,pz],true); 
+					// cylinder(pz,10,10);		
+				}
+				cylinder(pz, 3.8, 3.8, true);
+				difference() {
+					cylinder(pz, 5.5, 5.5, true);
+					// translate([-15/2,pe2/2-pdy,-15/2]) cube([15,25,15]);
+					cube([15,15,7], true);
+				}
+			}
+			//# cylinder(pz-2*3, 4, 4, true);
+			translate([0,0,-pz/2]) {
+				translate([0,0,0]) vis_noyee(3, pz);
+				translate([-43+px+35,-pdy,0]) {
+					vis_noyee(3, pz);
+					rotate(-5,[0,0,1]) translate([0,py-5,0]) {
+						vis_noyee(3, pz);
+						translate([3,-10,pz/2]) rotate(-90,[0,1,0]) cylinder(30,5,5);
 					}
 				}
-				translate([35 + px,0,pz/2]) cube([pe1,pe2,pz],true); 
-				// cylinder(pz,10,10);		
+				translate([-ax+sx-7,entre_axes_2-ay-raccord_y,0]) cylinder(pz, 4.5/2, 4.5/2);
 			}
-			cylinder(pz, 3.8, 3.8, true);
-			difference() {
-				cylinder(pz, 5.5, 5.5, true);
-				// translate([-15/2,pe2/2-pdy,-15/2]) cube([15,25,15]);
-				cube([15,15,7], true);
-			}
+	
 		}
-		//# cylinder(pz-2*3, 4, 4, true);
-		translate([0,0,-pz/2]) {
-			translate([0,0,0]) vis_noyee(3, pz);
-			translate([-43+px+35,-pdy,0]) {
-				vis_noyee(3, pz);
-				rotate(-10,[0,0,1]) translate([0,py-5,0]) {
-					vis_noyee(3, pz);
-					translate([3,-10,pz/2]) rotate(-90,[0,1,0]) cylinder(30,5,5);
-				}
-			}
-			translate([-ax+sx-7,entre_axes_2-ay-raccord_y,0]) vis_noyee(4, pz);
-		}
-
 	}
 }
 
@@ -110,8 +117,8 @@ module fixtube(b1, b2, tr) {
 	rotate(270, [0,1,0]) cylinder(b1, tr, tr);
 }
 
-//translate([ax,ay,-20+mz]) meca();
-translate([ax,-entre_axes_2+ay,fz]) pression();
+translate([ax,ay,-20+mz]) meca();
+! translate([ax,-entre_axes_2+ay,fz]) pression(2);
 
 difference() {
 	cube([sx,sy,sz]);
